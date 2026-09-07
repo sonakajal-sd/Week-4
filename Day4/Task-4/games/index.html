@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Canvas Chess</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="game">
+
+        <header class="game-header">
+            <div>
+                <h1>Chess</h1>
+                <p id="status">White to move</p>
+            </div>
+
+            <button id="restartBtn">
+                New Game
+            </button>
+        </header>
+
+        <section class="game-layout">
+
+            <div class="board-wrapper">
+
+                <canvas
+                    id="chessCanvas"
+                    width="800"
+                    height="800"
+                ></canvas>
+
+            </div>
+
+            <aside class="panel">
+
+                <h2>Moves</h2>
+
+                <div id="moveList" class="move-list"></div>
+
+            </aside>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+

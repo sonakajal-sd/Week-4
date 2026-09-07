@@ -1,0 +1,19 @@
+.stats{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    background: #f2f2f2;
+}
+
+.stat{
+    text-align: center;
+}
+.stat h2{
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+.stat p{
+    font-size: 20px;
+}

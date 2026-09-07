@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kanban - IndexedDB</title>
+</head>
+
+<body>
+
+    <h1>Kanban Board</h1>
+
+    <button id="addTask">Add Task</button>
+    <button id="showTasks">Show Tasks</button>
+
+    <ul id="taskList"></ul>
+
+    <script src="indexedDb.js"></script>
+
+    <script>
+        const addTaskButton = document.getElementById("addTask");
+        const showTasksButton = document.getElementById("showTasks");
+        const taskList = document.getElementById("taskList");
+
+
+        // Add task
+        addTaskButton.addEventListener("click", async () => {
+
+            const task = {
+                title: "Learn IndexedDB",
+                status: "todo",
+                createdAt: new Date().toISOString()
+            };
+
+            try {
+                const id = await addRecord(task);
+
+                console.log("Task added with ID:", id);
+
+                alert("Task added!");
+            } catch (error) {
+                console.error("Error adding task:", error);
+            }
+        });
+
+
+        // Show all tasks
+        showTasksButton.addEventListener("click", async () => {
+
+            try {
+                const tasks = await getAllRecords();
+
+                taskList.innerHTML = "";
+
+                tasks.forEach((task) => {
+
+                    const li = document.createElement("li");
+
+                    li.textContent =
+                        `${task.id} - ${task.title} - ${task.status}`;
+
+                    taskList.appendChild(li);
+                });
+
+                console.log("All tasks:", tasks);
+
+            } catch (error) {
+                console.error("Error getting tasks:", error);
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A2HS Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0077c2"/>
+    <link rel="manifest" href="manifest.json">
+  </head>
+  <body>
+    <p>Add To Home Screen</p>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('Registration success. Scope is ', reg.scope))
+        .catch(err => console.log('Registration failed. ', err));
+      }
+    </script>
+  </body>
+</html>

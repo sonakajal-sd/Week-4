@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Browser APIs</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <h1>Browser APIs Practice</h1>
+
+
+    <!-- 1. Clipboard -->
+
+    <h2>Clipboard</h2>
+
+    <pre id="codeBlock">const name = "Sona";
+console.log(name);</pre>
+
+    <button id="copyBtn">Copy Code</button>
+
+    <p id="copyMessage"></p>
+
+
+    <!-- 2. Contact Form -->
+
+    <h2>Contact Form</h2>
+
+    <form id="contactForm">
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Your name"
+            required
+        >
+
+        <input
+            type="text"
+            id="location"
+            placeholder="Your location"
+        >
+
+        <button type="submit">
+            Submit
+        </button>
+
+    </form>
+
+
+    <!-- 3. Geolocation -->
+
+    <button id="locationBtn">
+        Detect Location
+    </button>
+
+    <p id="locationMessage"></p>
+
+
+    <!-- 4. Share -->
+
+    <h2>Share</h2>
+
+    <button id="shareBtn">
+        Share Page
+    </button>
+
+    <p id="shareMessage"></p>
+
+
+    <script src="./script.js"></script>
+
+</body>
+
+</html>

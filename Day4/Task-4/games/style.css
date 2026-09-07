@@ -1,0 +1,187 @@
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    background:
+        radial-gradient(
+            circle at top,
+            #252525,
+            #101010 70%
+        );
+
+    color: #fff;
+
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+}
+
+.game {
+    width: min(1200px, 100%);
+}
+
+.game-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+.game-header h1 {
+    margin: 0;
+    font-size: 34px;
+}
+
+.game-header p {
+    margin: 5px 0 0;
+    color: #aaa;
+}
+
+button {
+    border: 0;
+    border-radius: 10px;
+
+    padding: 12px 20px;
+
+    background: #ffffff;
+    color: #111;
+
+    font-weight: 700;
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        opacity 0.15s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.game-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, 800px)
+        260px;
+
+    gap: 25px;
+
+    align-items: start;
+}
+
+.board-wrapper {
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    position: relative;
+}
+
+canvas {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.45);
+
+    cursor: pointer;
+
+    touch-action: none;
+}
+
+.panel {
+    background: rgba(255, 255, 255, 0.06);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.1);
+
+    border-radius: 14px;
+
+    padding: 18px;
+
+    max-height: 800px;
+    overflow-y: auto;
+}
+
+.panel h2 {
+    margin-top: 0;
+}
+
+.move-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.move-row {
+    display: grid;
+
+    grid-template-columns:
+        35px
+        1fr
+        1fr;
+
+    padding: 7px;
+
+    border-radius: 7px;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    font-size: 14px;
+}
+
+@media (max-width: 950px) {
+
+    .game-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .panel {
+        max-height: 250px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .game-header h1 {
+        font-size: 26px;
+    }
+
+    button {
+        padding: 9px 13px;
+    }
+}

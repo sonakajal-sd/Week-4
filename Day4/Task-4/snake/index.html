@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Makes the game responsive on mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Snake Game</title>
+
+    <!-- Connect CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="game-container">
+
+        <!-- Game heading -->
+        <header class="game-header">
+            <h1>Snake Game 🐍</h1>
+            <p>Eat the food. Grow the snake. Don't hit the wall!</p>
+        </header>
+
+
+        <!-- Score section -->
+        <section class="score-board" aria-label="Game score">
+
+            <div class="score-item">
+                <span class="score-label">Score</span>
+                <strong id="score">0</strong>
+            </div>
+
+            <div class="score-item">
+                <span class="score-label">High Score</span>
+                <strong id="highScore">0</strong>
+            </div>
+
+        </section>
+
+
+        <!-- Game area -->
+        <section class="game-area">
+
+            <!-- Canvas where the game is drawn -->
+            <canvas
+                id="gameCanvas"
+                width="400"
+                height="400"
+                aria-label="Snake game board">
+            </canvas>
+
+
+            <!-- Game overlay -->
+
+            <div
+                id="gameOverlay"
+                class="game-overlay"
+                aria-live="polite">
+
+                <div class="overlay-content">
+
+                    <h2 id="overlayTitle">Snake Game</h2>
+
+                    <p id="overlayMessage">
+                        Press Start Game to begin
+                    </p>
+
+                    <button
+                        id="overlayButton"
+                        class="primary-button"
+                        type="button">
+                        Start Game
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Game controls -->
+        <section class="controls" aria-label="Game controls">
+
+            <button
+                id="startButton"
+                class="primary-button"
+                type="button">
+                ▶ Start
+            </button>
+
+            <button
+                id="pauseButton"
+                class="secondary-button"
+                type="button"
+                disabled>
+                ⏸ Pause
+            </button>
+
+            <button
+                id="stopButton"
+                class="secondary-button"
+                type="button"
+                disabled>
+                ■ Stop
+            </button>
+
+        </section>
+
+
+        <!-- Keyboard instructions -->
+        <section class="instructions">
+
+            <h2>How to Play</h2>
+
+            <p>
+                Use
+                <kbd>↑</kbd>
+                <kbd>↓</kbd>
+                <kbd>←</kbd>
+                <kbd>→</kbd>
+                or
+                <kbd>W</kbd>
+                <kbd>A</kbd>
+                <kbd>S</kbd>
+                <kbd>D</kbd>
+                to move.
+            </p>
+
+            <p>
+                Press <kbd>P</kbd> to pause.
+                Press <kbd>Enter</kbd> to start or resume.
+            </p>
+
+        </section>
+
+
+        <!-- Screen-reader game status -->
+        <p
+            id="gameStatus"
+            class="sr-only"
+            aria-live="assertive">
+            Game is ready.
+        </p>
+
+    </main>
+
+
+    <!-- Connect JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
+

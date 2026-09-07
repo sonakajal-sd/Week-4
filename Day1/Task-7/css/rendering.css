@@ -1,0 +1,92 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    padding: 40px;
+
+    font-family: Arial, sans-serif;
+
+    background: #f5f5f5;
+
+}
+
+
+/* Heading */
+
+h1 {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+
+}
+
+
+/* Main scroll container */
+
+#list-container {
+
+    width: 500px;
+
+    height: 500px;
+
+    margin: auto;
+
+    overflow-y: auto;
+
+    border: 2px solid black;
+
+    background: white;
+
+}
+
+
+/*
+    This element creates the
+    TOTAL scrollable height
+*/
+
+#spacer {
+
+    position: relative;
+
+    width: 100%;
+
+}
+
+
+/*
+    Only visible items are
+    placed inside this element
+*/
+
+#visible-items {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+}
+
+
+/* Individual item */
+
+.item {
+
+    height: 40px;
+
+    padding: 10px;
+
+    border-bottom: 1px solid #ddd;
+
+    background: white;
+
+}

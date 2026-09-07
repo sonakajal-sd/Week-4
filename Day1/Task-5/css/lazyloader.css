@@ -1,0 +1,14 @@
+
+.img-div{
+
+    display: flex;
+    flex-direction:column;
+    gap: 50px;
+}
+
+.img-div img{
+
+    height: auto;
+    max-width: 50%;
+}
+

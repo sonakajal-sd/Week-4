@@ -1,0 +1,14 @@
+#dom-log{
+    position:fixed;
+    right: 20px;
+    bottom:20px;
+    width:350px;
+    max-height: 250px;
+    overflow-y: auto;
+    padding: 15px;
+    background: #222;
+    color: white;
+    border-radius: 10px;
+    font-family: monospace;
+    font-size: 14px;
+}

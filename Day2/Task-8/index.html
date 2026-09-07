@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Performance</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        #count {
+            font-size: 40px;
+        }
+
+        .progress-container {
+            width: 400px;
+            height: 25px;
+            background: #ddd;
+            margin-top: 15px;
+        }
+
+        #progressBar {
+            width: 0%;
+            height: 100%;
+            background: green;
+            will-change: transform;
+        }
+
+        .box {
+            width: 80px;
+            height: 80px;
+            background: tomato;
+            position: relative;
+            margin: 20px 0;
+            will-change: transform;
+        }
+
+        .transform-box {
+            background: steelblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Animation Performance</h1>
+
+
+    <!-- COUNT UP -->
+    <section>
+        <h2>1. Count-Up Animation</h2>
+
+        <h3>Count: <span id="count">0</span></h3>
+
+        <button id="startBtn">Start Count</button>
+    </section>
+
+
+    <!-- UPLOAD PROGRESS -->
+    <section>
+        <h2>2. Upload Progress</h2>
+
+        <button id="uploadBtn">Start Upload</button>
+
+        <div class="progress-container">
+            <div id="progressBar"></div>
+        </div>
+
+        <p id="progressText">0%</p>
+    </section>
+
+
+    <!-- LEFT / TOP -->
+    <section>
+        <h2>3. Layout Animation - left</h2>
+
+        <button id="leftBtn">Animate Left</button>
+
+        <div id="leftBox" class="box"></div>
+    </section>
+
+
+    <!-- TRANSFORM -->
+    <section>
+        <h2>4. Compositor Animation - transform</h2>
+
+        <button id="transformBtn">Animate Transform</button>
+
+        <div id="transformBox" class="box transform-box"></div>
+    </section>
+
+
+    <script>
+
+        // ========================================
+        // 1. COUNT-UP ANIMATION
+        // ========================================
+
+        const countElement = document.getElementById("count");
+        const startButton = document.getElementById("startBtn");
+
+        let startTime;
+
+        const duration = 2000;
+        const target = 100;
+
+
+        function easeOut(t) {
+            return 1 - Math.pow(1 - t, 3);
+        }
+
+
+        function countAnimation(timestamp) {
+
+            if (!startTime) {
+                startTime = timestamp;
+            }
+
+            const elapsed = timestamp - startTime;
+
+            const progress = Math.min(elapsed / duration, 1);
+
+            const easedProgress = easeOut(progress);
+
+            const currentValue = Math.floor(
+                easedProgress * target
+            );
+
+            countElement.textContent = currentValue;
+
+
+            if (progress < 1) {
+                requestAnimationFrame(countAnimation);
+            }
+        }
+
+
+        startButton.addEventListener("click", () => {
+
+            startTime = null;
+
+            requestAnimationFrame(countAnimation);
+
+        });
+
+
+        // ========================================
+        // 2. UPLOAD PROGRESS
+        // ========================================
+
+        const uploadButton = document.getElementById("uploadBtn");
+        const progressBar = document.getElementById("progressBar");
+        const progressText = document.getElementById("progressText");
+
+        let uploadProgress = 0;
+
+
+        uploadButton.addEventListener("click", () => {
+
+            uploadProgress = 0;
+
+            progressBar.style.transform = "scaleX(0)";
+            progressText.textContent = "0%";
+
+            mockUpload();
+
+        });
+
+
+        function mockUpload() {
+
+            const interval = setTimeout(() => {
+
+                uploadProgress += 10;
+
+                animateProgress(uploadProgress);
+
+                if (uploadProgress < 100) {
+                    mockUpload();
+                }
+
+            }, 300);
+
+        }
+
+
+        function animateProgress(targetProgress) {
+
+            const targetScale = targetProgress / 100;
+
+            requestAnimationFrame(() => {
+
+                progressBar.style.transform =
+                    `scaleX(${targetScale})`;
+
+                progressText.textContent =
+                    `${targetProgress}%`;
+
+            });
+
+        }
+
+
+        // ========================================
+        // 3. LEFT / TOP ANIMATION
+        // ========================================
+
+        const leftButton = document.getElementById("leftBtn");
+        const leftBox = document.getElementById("leftBox");
+
+        leftButton.addEventListener("click", () => {
+
+            let position = 0;
+
+            function moveLeft(timestamp) {
+
+                position += 2;
+
+                leftBox.style.left = `${position}px`;
+
+                if (position < 300) {
+                    requestAnimationFrame(moveLeft);
+                }
+
+            }
+
+            requestAnimationFrame(moveLeft);
+
+        });
+
+
+        // ========================================
+        // 4. TRANSFORM ANIMATION
+        // ========================================
+
+        const transformButton =
+            document.getElementById("transformBtn");
+
+        const transformBox =
+            document.getElementById("transformBox");
+
+
+        transformButton.addEventListener("click", () => {
+
+            let position = 0;
+
+            function moveTransform(timestamp) {
+
+                position += 2;
+
+                transformBox.style.transform =
+                    `translateX(${position}px)`;
+
+                if (position < 300) {
+                    requestAnimationFrame(moveTransform);
+                }
+
+            }
+
+            requestAnimationFrame(moveTransform);
+
+        });
+
+    </script>
+
+</body>
+</html>
