@@ -1,13 +1,21 @@
 {
-  "name": "day5",
+  "name": "day5-task-manager-spa",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Week 4 Day 5 - vanilla JS SPA (router + state manager + task manager)",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npx --yes serve . -l 5500",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
+    "deploy": "npx --yes gh-pages -d . -b gh-pages"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "devDependencies": {
+    "@vitest/coverage-v8": "^2.1.4",
+    "jsdom": "^25.0.1",
+    "vitest": "^2.1.4"
+  }
 }

@@ -1,77 +1,54 @@
-export function createStore(initialState, reducer) {
-
-
+export function createStore(initialState, reducer, middlewares = []) {
   let state = initialState;
-
-  const listeners = [];
+  let listeners = [];
 
   function getState() {
     return state;
   }
 
-  function dispatch(action) {
+  function baseDispatch(action) {
     state = reducer(state, action);
-
-    listeners.forEach(listener => listener());
+    listeners.slice().forEach((listener) => listener(state, action));
+    return action;
   }
 
   function subscribe(listener) {
     listeners.push(listener);
+    return () => {
+      listeners = listeners.filter((l) => l !== listener);
+    };
   }
 
-  return {
-    getState,
-    dispatch,
-    subscribe
+  const store = { getState, subscribe };
+
+  store.dispatch = middlewares.reduceRight(
+    (next, middleware) => middleware(store)(next),
+    baseDispatch
+  );
+
+  return store;
+}
+
+export function createStorageMiddleware(key, select = (state) => state) {
+  return (store) => (next) => (action) => {
+    const result = next(action);
+
+    try {
+      localStorage.setItem(key, JSON.stringify(select(store.getState())));
+    } catch (err) {
+      console.warn("Failed to persist state to localStorage", err);
+    }
+
+    return result;
   };
 }
 
-
- export function reducer(state, action) {
-  if (action.type === "NAVIGATE") {
-    return {
-      ...state,
-      route: action.payload
-    };
+export function loadPersistedState(key, fallback = {}) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch (err) {
+    console.warn("Failed to load persisted state from localStorage", err);
+    return fallback;
   }
-
-  if(action.type ==="ADD ITEM"){
-    return{
-        ...state,
-        items:[...state.items , action.payload]
-    };
-  }
-
-  if(action.type ==="UPDATE_ITEM"){
-    return {
-        ...state,
-        items: state.items.map(item =>
-            item.id=== action.payload.id
-            ? {...item, ...action.payload}
-            :item
-        )
-    };
-  }
-if(action.type ==="DELETE_ITEM"){
-    return{
-        ...state,
-        items:state.items.filter(item => item.id !==action.payload)
-    };
-}
-
-if(action.type ==="SET_LOADING"){
-    return{
-        ...state,
-        loading:action.payload
-    };
-}
-if(action.type ==="SET_ERROR"){
-    return{
-        ...state,
-        error:action.payload
-    };
-}
-
-
-  return state;
 }
